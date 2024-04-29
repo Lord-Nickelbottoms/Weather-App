@@ -7,35 +7,48 @@
 
 import Foundation
 
+protocol WeatherWebServiceDelegate {
+    func didFetchWeather(weather: Weather)
+}
+
 final class WeatherWebService {
+    
+    var delegate: WeatherWebServiceDelegate?
     
     let cityName = "Paris"
     let baseURL = "https://api.openweathermap.org/data/2.5/weather?"
-    
-    let apiManager: APIManager? = nil
     var key = ""
     
-    init() {
-        self.key = apiManager?.getApiKey() ?? ""
-    }
-    
     func fetchWeatherWithCityName(cityName: String) {
-        let finalURL =  "\(baseURL)appid=\(key)&units=metric&q=\(cityName)"
+        key = APIManager.shared.getApiKey ?? ""
+        print("Requesting...")
+        
+        if !key.isEmpty {
+            let finalURL = "\(baseURL)appid=\(key)&units=metric&q=\(cityName)"
+            performRequest(url: finalURL)
+        } else {
+            print("API key is empty")
+        }
     }
     
-    func performRequest(url: String, completion: @escaping(Any) -> Void) {
+    func performRequest(url: String) {
         if let url = URL(string: url) {
             let session = URLSession.shared
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil {
-                    completion(error ?? "Default DataTask error!")
+                    print(error ?? "Default DataTask error!")
                 }
                 
                 if let safeData = data {
-                    let parsedData = self.parseJSON(safeData)
-                    completion(parsedData as Any)
+                    if let parsedData = self.parseJSON(safeData) {
+//                        completion(parsedData)
+                        if self.delegate != nil {
+                            self.delegate?.didFetchWeather(weather: parsedData)
+                        }
+                    }
                 }
             }
+            task.resume()
         }
     }
     

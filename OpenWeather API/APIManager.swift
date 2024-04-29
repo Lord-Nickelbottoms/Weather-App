@@ -20,10 +20,10 @@ class APIManager {
     }
     
     func setApiKey(_ keyToStore: String) {
-        defaults.setValue("6d7858c592c25f6b49bc8fc1a6beb5f3", forKey: "apiKey")
+        defaults.setValue(keyToStore, forKey: "apiKey")
     }
     
-    func getApiKey() -> String? {
+    var getApiKey: String? {
         return defaults.object(forKey: "apiKey") as? String
     }
 }
