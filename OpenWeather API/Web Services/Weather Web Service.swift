@@ -1,19 +1,19 @@
-//
-//  Weather Web Service.swift
-//  OpenWeather API
-//
-//  Created by Nizaam Haffejee on 2024/04/18.
-//
+    //
+    //  Weather Web Service.swift
+    //  OpenWeather API
+    //
+    //  Created by Nizaam Haffejee on 2024/04/18.
+    //
 
 import Foundation
 
-protocol WeatherWebServiceDelegate {
+protocol WeatherWebServiceDelegate: AnyObject {
     func didFetchWeather(weather: Weather)
 }
 
 final class WeatherWebService {
     
-    var delegate: WeatherWebServiceDelegate?
+    weak var delegate: WeatherWebServiceDelegate?
     
     let cityName = "Paris"
     let baseURL = "https://api.openweathermap.org/data/2.5/weather?"
@@ -41,10 +41,7 @@ final class WeatherWebService {
                 
                 if let safeData = data {
                     if let parsedData = self.parseJSON(safeData) {
-//                        completion(parsedData)
-                        if self.delegate != nil {
-                            self.delegate?.didFetchWeather(weather: parsedData)
-                        }
+                        self.delegate?.didFetchWeather(weather: parsedData)
                     }
                 }
             }
