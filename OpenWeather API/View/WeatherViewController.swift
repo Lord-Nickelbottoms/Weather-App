@@ -17,3 +17,12 @@ class WeatherViewController: UIViewController {
 
 }
 
+extension WeatherViewController: WeatherViewModelDelegate {
+    
+    func didUpdateUI(_ weatherData: Weather) {
+        DispatchQueue.main.async { [self] in
+            cityName.text = weatherData.cityName
+            temperatureLabel.text = "\(String(format: "%.0f", weatherData.main.temp))ºC"
+        }
+    }
+}
