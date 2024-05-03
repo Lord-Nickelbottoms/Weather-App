@@ -31,6 +31,8 @@ class WeatherViewController: UIViewController {
     @IBAction func searchButton(_ sender: UIButton) {
         if searchTextField.text != nil {
             weatherViewModel?.fetchWeatherWithCityName(cityName: searchTextField.text ?? "")
+        } else {
+            searchTextField.placeholder = "Enter something!"
         }
     }
 }
@@ -41,6 +43,10 @@ extension WeatherViewController: WeatherViewModelDelegate {
         DispatchQueue.main.async { [self] in
             cityNameLabel.text = weatherData.cityName
             temperatureLabel.text = "\(String(format: "%.0f", weatherData.main.temp))ºC"
+            conditionNameLabel.text = weatherData.weather[0].description
+            minimumTemperatureLabel.text = "\(String(format: "%.0f", weatherData.main.tempMin))ºC"
+            maximumTemperatureLabel.text =  "\(String(format: "%.0f", weatherData.main.tempMax))ºC"
+            feelsLikeLabel.text =  "\(String(format: "%.0f", weatherData.main.feelsLike))ºC"
         }
     }
 }
