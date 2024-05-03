@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PWw-T3-TlB">
-                                <rect key="frame" x="20" y="70" width="405" height="81"/>
+                                <rect key="frame" x="20" y="70" width="405" height="83"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Yl-ZA-Nbq">
@@ -53,6 +53,9 @@
                                                 <rect key="frame" x="344" y="0.0" width="49.666666666666686" height="74"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" image="magnifyingglass" catalog="system"/>
+                                                <connections>
+                                                    <action selector="searchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YTE-oA-BMl"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -127,6 +130,7 @@
                     <connections>
                         <outlet property="cityNameLabel" destination="Yfg-Vw-t62" id="Z9w-5H-ITf"/>
                         <outlet property="conditionImage" destination="yI1-fb-j1z" id="M3s-DR-vze"/>
+                        <outlet property="conditionNameLabel" destination="JgP-79-iDX" id="NyQ-U1-83M"/>
                         <outlet property="feelsLikeLabel" destination="Z7G-Ao-jxf" id="KTa-GF-9bV"/>
                         <outlet property="maximumTemperatureLabel" destination="MfM-Ln-UBR" id="lHA-9N-oHV"/>
                         <outlet property="minimumTemperatureLabel" destination="25l-67-6WK" id="fQq-F8-byS"/>
@@ -136,7 +140,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-256.48854961832058" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="-257.25190839694653" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>

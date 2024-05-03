@@ -13,6 +13,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet var cityNameLabel: UILabel!
     @IBOutlet var temperatureLabel: UILabel!
     @IBOutlet var conditionImage: UIImageView!
+    @IBOutlet var conditionNameLabel: UILabel!
     @IBOutlet var minimumTemperatureLabel: UILabel!
     @IBOutlet var maximumTemperatureLabel: UILabel!
     @IBOutlet var feelsLikeLabel: UILabel!
@@ -27,6 +28,11 @@ class WeatherViewController: UIViewController {
     }
 
 
+    @IBAction func searchButton(_ sender: UIButton) {
+        if searchTextField.text != nil {
+            weatherViewModel?.fetchWeatherWithCityName(cityName: searchTextField.text ?? "")
+        }
+    }
 }
 
 extension WeatherViewController: WeatherViewModelDelegate {
