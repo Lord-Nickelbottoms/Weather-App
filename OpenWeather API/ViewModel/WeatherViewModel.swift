@@ -7,6 +7,28 @@
 
 import Foundation
 
-class WeatherViewModel {
+protocol WeatherViewModelDelegate: AnyObject {
+    
+    func didUpdateUI(_ weatherData: Weather)
+}
+
+class WeatherViewModel: WeatherWebServiceDelegate {
+    
+    var weatherWebService = WeatherWebService()
+    weak var delegate: WeatherViewModelDelegate?
+    var weatherData: Weather?
+    
+    init() {
+        weatherWebService.delegate = self
+    }
+    
+    func fetchWeatherWithCityName(cityName: String) {
+        weatherWebService.fetchWeatherWithCityName(cityName: cityName)
+    }
+    
+    func didFetchWeather(weather: Weather) {
+        self.weatherData = weather
+        delegate?.didUpdateUI(weather)
+    }
     
 }
