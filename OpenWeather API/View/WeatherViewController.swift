@@ -43,10 +43,11 @@ extension WeatherViewController: WeatherViewModelDelegate {
         DispatchQueue.main.async { [self] in
             cityNameLabel.text = weatherData.cityName
             temperatureLabel.text = "\(String(format: "%.0f", weatherData.main.temp))ºC"
+            conditionImage.image = UIImage(named: weatherData.weather[0].icon)
             conditionNameLabel.text = weatherData.weather[0].description
-            minimumTemperatureLabel.text = "\(String(format: "%.0f", weatherData.main.tempMin))ºC"
-            maximumTemperatureLabel.text =  "\(String(format: "%.0f", weatherData.main.tempMax))ºC"
-            feelsLikeLabel.text =  "\(String(format: "%.0f", weatherData.main.feelsLike))ºC"
+            minimumTemperatureLabel.text = "Min: \(String(format: "%.0f", weatherData.main.tempMin))ºC"
+            maximumTemperatureLabel.text =  "Max: \(String(format: "%.0f", weatherData.main.tempMax))ºC"
+            feelsLikeLabel.text =  "Feels Like: \(String(format: "%.0f", weatherData.main.feelsLike))ºC"
         }
     }
 }
