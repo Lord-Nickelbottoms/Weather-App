@@ -47,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7016EB3A2BED26BE00A053B5 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				70D3DE0C2BD1391200C5D240 /* LaunchScreen.storyboard */,
+				70D3DE072BD1391100C5D240 /* Main.storyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		70D3DDF52BD1391000C5D240 = {
 			isa = PBXGroup;
 			children = (
@@ -82,9 +91,8 @@
 		70D3DE152BD1472D00C5D240 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				70D3DE072BD1391100C5D240 /* Main.storyboard */,
+				7016EB3A2BED26BE00A053B5 /* UI */,
 				70D3DE052BD1391100C5D240 /* WeatherViewController.swift */,
-				70D3DE0C2BD1391200C5D240 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
