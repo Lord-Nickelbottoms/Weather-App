@@ -31,6 +31,7 @@ class WeatherViewController: UIViewController {
     @IBAction func searchButton(_ sender: UIButton) {
         if searchTextField.text != nil {
             weatherViewModel?.fetchWeatherWithCityName(cityName: searchTextField.text ?? "")
+            searchTextField.text = ""
         } else {
             searchTextField.placeholder = "Enter something!"
         }
