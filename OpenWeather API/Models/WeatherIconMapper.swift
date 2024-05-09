@@ -51,7 +51,7 @@ struct WeatherIconMapper {
                 return "cloud"
                 
             default:
-                return "error"
+                return "cloud.slash"
         }
     }
 }
