@@ -19,8 +19,11 @@ final class WeatherWebService {
     let baseURL = "https://api.openweathermap.org/data/2.5/weather?"
     var key = ""
     
-    func fetchWeatherWithCityName(cityName: String) {
+    init() {
         key = APIManager.shared.getApiKey ?? ""
+    }
+    
+    func fetchWeatherWithCityName(cityName: String) {
         print("Requesting...")
         
         if !key.isEmpty {
