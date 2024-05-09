@@ -44,7 +44,7 @@ extension WeatherViewController: WeatherViewModelDelegate {
             cityNameLabel.text = weatherData.cityName
             temperatureLabel.text = "\(String(format: "%.0f", weatherData.main.temp))ºC"
             conditionImage.image = UIImage(named: weatherData.weather[0].icon)
-            conditionNameLabel.text = weatherData.weather[0].description
+            conditionNameLabel.text = weatherData.weather[0].description.capitalized
             minimumTemperatureLabel.text = "Min: \(String(format: "%.0f", weatherData.main.tempMin))ºC"
             maximumTemperatureLabel.text =  "Max: \(String(format: "%.0f", weatherData.main.tempMax))ºC"
             feelsLikeLabel.text =  "Feels Like: \(String(format: "%.0f", weatherData.main.feelsLike))ºC"
