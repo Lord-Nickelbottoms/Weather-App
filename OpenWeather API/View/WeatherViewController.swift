@@ -48,6 +48,12 @@ extension WeatherViewController: WeatherViewModelDelegate {
             minimumTemperatureLabel.text = "Min: \(String(format: "%.0f", weatherData.main.tempMin))ºC"
             maximumTemperatureLabel.text =  "Max: \(String(format: "%.0f", weatherData.main.tempMax))ºC"
             feelsLikeLabel.text =  "Feels Like: \(String(format: "%.0f", weatherData.main.feelsLike))ºC"
+            
+            if weatherData.weather[0].weatherType == "cloud.slash" {
+                conditionImage.image = UIImage(named: "cloud.slash")
+            } else {
+                conditionImage.image = UIImage(systemName: weatherData.weather[0].weatherType)
+            }
         }
     }
 }
