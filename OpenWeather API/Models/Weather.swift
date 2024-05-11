@@ -112,6 +112,10 @@ struct WeatherElement: Codable {
     let description: String
     let icon: String
     
+    var weatherType: String {
+        return WeatherIconMapper.sFSymbol(for: id)
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case main = "main"

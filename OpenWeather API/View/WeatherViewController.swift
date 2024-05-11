@@ -31,6 +31,7 @@ class WeatherViewController: UIViewController {
     @IBAction func searchButton(_ sender: UIButton) {
         if searchTextField.text != nil {
             weatherViewModel?.fetchWeatherWithCityName(cityName: searchTextField.text ?? "")
+            searchTextField.text = ""
         } else {
             searchTextField.placeholder = "Enter something!"
         }
@@ -44,10 +45,16 @@ extension WeatherViewController: WeatherViewModelDelegate {
             cityNameLabel.text = weatherData.cityName
             temperatureLabel.text = "\(String(format: "%.0f", weatherData.main.temp))ºC"
             conditionImage.image = UIImage(named: weatherData.weather[0].icon)
-            conditionNameLabel.text = weatherData.weather[0].description
+            conditionNameLabel.text = weatherData.weather[0].description.capitalized
             minimumTemperatureLabel.text = "Min: \(String(format: "%.0f", weatherData.main.tempMin))ºC"
             maximumTemperatureLabel.text =  "Max: \(String(format: "%.0f", weatherData.main.tempMax))ºC"
             feelsLikeLabel.text =  "Feels Like: \(String(format: "%.0f", weatherData.main.feelsLike))ºC"
+            
+            if weatherData.weather[0].weatherType == "cloud.slash" {
+                conditionImage.image = UIImage(named: "cloud.slash")
+            } else {
+                conditionImage.image = UIImage(systemName: weatherData.weather[0].weatherType)
+            }
         }
     }
 }
