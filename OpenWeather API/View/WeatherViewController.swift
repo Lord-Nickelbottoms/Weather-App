@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class WeatherViewController: UIViewController {
+class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet var searchTextField: UITextField!
     @IBOutlet var cityNameLabel: UILabel!
@@ -19,12 +20,17 @@ class WeatherViewController: UIViewController {
     @IBOutlet var feelsLikeLabel: UILabel!
     
     var weatherViewModel: WeatherViewModel?
+    var userLocationManager: CLLocationManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         weatherViewModel = WeatherViewModel()
         weatherViewModel?.delegate = self
+        
+        userLocationManager = CLLocationManager()
+        userLocationManager?.delegate = self
+        userLocationManager?.requestWhenInUseAuthorization()
     }
 
 
