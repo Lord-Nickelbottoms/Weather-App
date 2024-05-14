@@ -8,7 +8,9 @@
 import UIKit
 import CoreLocation
 
-class WeatherViewController: UIViewController, CLLocationManagerDelegate {
+class WeatherViewController: UIViewController {
+    
+//MARK: - IBOutlets
     
     @IBOutlet var searchTextField: UITextField!
     @IBOutlet var cityNameLabel: UILabel!
@@ -91,6 +93,8 @@ extension WeatherViewController: WeatherViewModelDelegate {
     
     func didUpdateUI(_ weatherData: Weather) {
         DispatchQueue.main.async { [self] in
+            activityIndicator.stopAnimating()
+            
             cityNameLabel.text = weatherData.cityName
             temperatureLabel.text = "\(String(format: "%.0f", weatherData.main.temp))ºC"
             conditionImage.image = UIImage(named: weatherData.weather[0].icon)
