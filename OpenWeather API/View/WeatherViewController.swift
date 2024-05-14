@@ -32,13 +32,36 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         
         userLocationManager = CLLocationManager()
         userLocationManager?.delegate = self
-        userLocationManager?.requestWhenInUseAuthorization()
+    }
+    
+    func checkLocationPermission() {
+        switch userLocationManager?.authorizationStatus {
+                
+            case .authorizedWhenInUse:
+                userLocationManager?.requestLocation()
+                activityIndicator.startAnimating()
+                
+            case .notDetermined:
+                userLocationManager?.requestWhenInUseAuthorization()
+                
+            case .denied, .restricted:
+                userLocationManager?.requestLocation()
+                let alert = UIAlertController(title: "Location denied.", message: "This app requires your location permission to determine the weather at your location.\nPlease head to Settings and change it to Allow", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default))
+                present(alert, animated: true)
+                
+            default:
+                break
+        }
     }
 
+//MARK: - IBActions
 
     @IBAction func searchButton(_ sender: UIButton) {
-        if searchTextField.text != nil {
+        if searchTextField.text != "" {
             weatherViewModel?.fetchWeatherWithCityName(cityName: searchTextField.text ?? "")
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
             searchTextField.text = ""
         } else {
             searchTextField.placeholder = "Enter something!"
