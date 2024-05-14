@@ -22,9 +22,17 @@ class WeatherViewModel: WeatherWebServiceDelegate {
         weatherWebService.delegate = self
     }
     
+//MARK: - fetch functions
+    
     func fetchWeatherWithCityName(cityName: String) {
         weatherWebService.fetchWeatherWithCityName(cityName: cityName)
     }
+    
+    func fetchWeatherWithCoordinate(latitude: String, longitude: String) {
+        weatherWebService.fetchWeatherWithCoordinates(latitude, longitude)
+    }
+    
+//MARK: - UI update function
     
     func didFetchWeather(weather: Weather) {
         self.weatherData = weather

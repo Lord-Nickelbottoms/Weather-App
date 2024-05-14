@@ -23,11 +23,24 @@ final class WeatherWebService {
         key = APIManager.shared.getApiKey ?? ""
     }
     
+//MARK: - Functions
+    
     func fetchWeatherWithCityName(cityName: String) {
         print("Requesting...")
         
         if !key.isEmpty {
             let finalURL = "\(baseURL)appid=\(key)&units=metric&q=\(cityName)"
+            performRequest(url: finalURL)
+        } else {
+            print("API key is empty")
+        }
+    }
+    
+    func fetchWeatherWithCoordinates(_ latitude: String, _ longitude: String) {
+        print("Requesting using location data...")
+        
+        if !key.isEmpty {
+            let finalURL = "\(baseURL)lat=\(latitude)&lon=\(longitude)&appid=\(key)&units=metric"
             performRequest(url: finalURL)
         } else {
             print("API key is empty")
