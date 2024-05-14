@@ -18,6 +18,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var minimumTemperatureLabel: UILabel!
     @IBOutlet var maximumTemperatureLabel: UILabel!
     @IBOutlet var feelsLikeLabel: UILabel!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    
     
     var weatherViewModel: WeatherViewModel?
     var userLocationManager: CLLocationManager?
@@ -40,6 +42,24 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             searchTextField.text = ""
         } else {
             searchTextField.placeholder = "Enter something!"
+        }
+    }
+    
+    
+    @IBAction func locationButtonTapped(_ sender: UIButton) {
+        checkLocationPermission()
+    }
+}
+
+extension WeatherViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        weatherViewModel?.fetchWeatherWithCoordinate(latitude: String(locations[0].coordinate.latitude), longitude: String(locations[0].coordinate.longitude))
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
+        DispatchQueue.main.async { [self] in
+            conditionImage.image = UIImage(named: "cloud.slash")
         }
     }
 }
